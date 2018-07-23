@@ -14,7 +14,7 @@ toaddrs=credFile.readline().strip()
 keyword=credFile.readline().strip()
 credFile.close()
 fromaddr=username+'@gmail.com'
-
+#testing 
 #thanks to https://pbeblog.wordpress.com/category/programming/python/
 def sendEmail(subject,text):
     import smtplib
