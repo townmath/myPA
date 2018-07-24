@@ -80,13 +80,13 @@ def checkMail():#checks mail for specific commands
         body=body.strip().lower()
         print body
         if body=='self destruct':
-            emailText=baxterCommands.selfDestruct()
+            emailText=paCommands.selfDestruct()
             subject='Self Destruct Sequence'
         elif body=='tell me a joke':
-            emailText=baxterCommands.jokes()
+            emailText=paCommands.jokes()
             subject='Joke'
         elif body=='quote of the day':
-            emailText=baxterCommands.quotes()
+            emailText=paCommands.quotes()
             subject='Quotable Quote'
         else:
             mail.store("1:*", '+X-GM-LABELS', '\\Trash')
@@ -100,8 +100,8 @@ def checkMail():#checks mail for specific commands
     mail.logout()
 
 
-#while True:
-if True:#testing
+while True:
+#if True:#testing
     #while datetime.datetime.now().strftime('%a')!='Mon':
     if '06'<=datetime.datetime.now().strftime('%H')<='23':#24 hour clock
         checkMail()
