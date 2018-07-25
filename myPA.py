@@ -82,12 +82,15 @@ def checkMail():#checks mail for specific commands
         if body=='self destruct':
             emailText=paCommands.selfDestruct()
             subject='Self Destruct Sequence'
-        elif body=='tell me a joke':
+        elif 'joke' in body:
             emailText=paCommands.jokes()
             subject='Joke'
-        elif body=='quote of the day':
+        elif 'quote' in body:
             emailText=paCommands.quotes()
             subject='Quotable Quote'
+        elif 'python' in body:
+            emailText=paCommands.runFile(body[7:],'python')
+            subject='Results'
         else:
             mail.store("1:*", '+X-GM-LABELS', '\\Trash')
         sent=sendEmail(subject,emailText)
