@@ -30,27 +30,30 @@ def quotes():
     return getRandomLine('quotes.txt',12)
 
 def runFile(filename,command):
-    #ie runFile(filename,'python "'+filename+'"'):
+    #ie runFile('testing123.py','python')
+    print command
     import os
     import subprocess
     import time
     isError=False
     curTime=time.clock()#start timer
-    entry=filename+','
-    print (filename)
-    data = subprocess.Popen(command,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+    entry='File Ran: '+filename+'\n'
+    #print (filename)
+    data = subprocess.Popen([command,filename],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
     output=data.stdout.readline().decode()
     ellapsed=time.clock()-curTime
-    print (ellapsed)
-    entry+=str(ellapsed)+','
+    #print (ellapsed)
+    entry+='Time Ellapsed: '+str(ellapsed)+'\n'
     while output:
-        entry+=output.strip()+','
+        entry+=output.strip()+'\n'
         output=data.stdout.readline().decode()
     errData=data.stderr.readline().decode()
-    entry+=errData.strip()+','
+    entry+=errData.strip()+'\n'
     print entry
     return entry+'\n'
 
 if __name__ == "__main__":
     print quotes()
-    selfDestruct()
+    #selfDestruct()
+    fileName='testing123.py'
+    runFile(fileName,'python')
