@@ -48,7 +48,9 @@ def runFile(filename,command):
         entry+=output.strip()+'\n'
         output=data.stdout.readline().decode()
     errData=data.stderr.readline().decode()
-    entry+=errData.strip()+'\n'
+    while errData:
+        entry+=errData.strip()+'\n'
+        errData=data.stderr.readline().decode()
     print entry
     return entry+'\n'
 
