@@ -29,7 +29,28 @@ def quotes():
     #12 quotes, I should probably get this from the file, but not right now. 
     return getRandomLine('quotes.txt',12)
 
-if __name__ == "__main__":
-    print jokes()
+def runFile(filename,command):
+    #ie runFile(filename,'python "'+filename+'"'):
+    import os
+    import subprocess
     import time
+    isError=False
+    curTime=time.clock()#start timer
+    entry=filename+','
+    print (filename)
+    data = subprocess.Popen(command,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+    output=data.stdout.readline().decode()
+    ellapsed=time.clock()-curTime
+    print (ellapsed)
+    entry+=str(ellapsed)+','
+    while output:
+        entry+=output.strip()+','
+        output=data.stdout.readline().decode()
+    errData=data.stderr.readline().decode()
+    entry+=errData.strip()+','
+    print entry
+    return entry+'\n'
+
+if __name__ == "__main__":
+    print quotes()
     selfDestruct()
