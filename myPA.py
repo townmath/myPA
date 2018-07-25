@@ -106,7 +106,8 @@ while True:
     if '06'<=datetime.datetime.now().strftime('%H')<='23':#24 hour clock
         checkMail()
         time.sleep(1200) #so you don't waste precious clock cycles checking, check every 20 min
-    time.sleep(7200)#sleep the night away
+    else:
+        time.sleep(7200)#sleep the night away
     #while datetime.datetime.now().strftime('%a')!='Tue':#dow
     #while datetime.datetime.now().strftime('%I')!='06':#12 hour clock
 

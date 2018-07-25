@@ -26,7 +26,8 @@ def jokes():
     return getRandomLine('oneLiners.txt',66)
 
 def quotes():
-    return getRandomLine('quotes.txt',45)
+    #12 quotes, I should probably get this from the file, but not right now. 
+    return getRandomLine('quotes.txt',12)
 
 if __name__ == "__main__":
     print jokes()
