@@ -8,6 +8,8 @@ def selfDestruct():
         print (5-x)
     text+='boom\n'
     print ('boom')
+    import subprocess
+    subprocess.Popen(['shutdown','-h','+1','Good day, sir.'])
     return text
 
 def getRandomLine(fileName,maxNum):
@@ -32,7 +34,6 @@ def quotes():
 def runFile(filename,command):
     #ie runFile('testing123.py','python')
     print command
-    import os
     import subprocess
     import time
     isError=False
@@ -56,6 +57,6 @@ def runFile(filename,command):
 
 if __name__ == "__main__":
     print quotes()
-    #selfDestruct()
     fileName='testing123.py'
     runFile(fileName,'python')
+    selfDestruct()
