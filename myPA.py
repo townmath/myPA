@@ -79,7 +79,7 @@ def checkMail():#checks mail for specific commands
                 body+=char
         body=body.strip().lower()
         print body
-        if body=='self destruct':
+        if 'self destruct' or 'shutdown' in body:
             emailText=paCommands.selfDestruct()
             subject='Self Destruct Sequence'
         elif 'joke' in body:
