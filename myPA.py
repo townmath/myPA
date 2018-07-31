@@ -15,35 +15,6 @@ keyword=credFile.readline().strip()
 credFile.close()
 fromaddr=username+'@gmail.com'
 
-#thanks to https://pbeblog.wordpress.com/category/programming/python/
-def sendEmail(subject,text):
-    import smtplib
-
-    #msg = ("From: %s\r\nTo: %s\r\n\r\n"
-    #       % (fromaddr, ", ".join(toaddrs)))
-    #subject='Re: Alert'
-    text = "Good morning, sir, you are looking quite well today.  Here is/are your " + subject + ".\n\n" + text
-    text += '\nSir, will that be all?'
-
-    # Prepare actual message
-    msg = """\From: %s\nTo: %s\nSubject: %s\n\n%s
-    """ % (fromaddr, toaddrs,#", ".join(toaddrs),
-           subject, text)
-    try:
-    #if True:
-        server = smtplib.SMTP('smtp.gmail.com:587')
-        server.starttls()
-        server.login(username,password)
-        #print fromaddr,toaddrs,msg
-        server.sendmail(fromaddr, toaddrs, msg)
-        server.quit()
-        print 'I successfully sent the email'
-        return True
-    except:
-    #else:
-        print "Terribly sorry sir, I failed to send the email"
-        return False
-
 date = (datetime.date.today() - datetime.timedelta(7)).strftime("%d-%b-%Y")
 print date
 
@@ -93,7 +64,7 @@ def checkMail():#checks mail for specific commands
             subject='Results'
         else:
             mail.store("1:*", '+X-GM-LABELS', '\\Trash')
-        sent=sendEmail(subject,emailText)
+        sent=paCommands.sendEmail(subject,emailText,toaddrs,username,password)
         if sent:
             mail.store("1:*", '+X-GM-LABELS', '\\Trash')
     except:

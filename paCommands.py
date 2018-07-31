@@ -55,8 +55,48 @@ def runFile(filename,command):
     print entry
     return entry+'\n'
 
+#thanks to https://pbeblog.wordpress.com/category/programming/python/
+def sendEmail(subject,text,toaddrs,username,password):
+    import smtplib
+    fromaddr=username+'@gmail.com'
+    text = "Good morning, sir, you are looking quite well today.  Here is/are your " + subject + ".\n\n" + text
+    text += '\nSir, will that be all?'
+
+    # Prepare actual message
+    msg = """\From: %s\nTo: %s\nSubject: %s\n\n%s
+    """ % (fromaddr, toaddrs,#", ".join(toaddrs),
+           subject, text)
+    try:
+    #if True:
+        server = smtplib.SMTP('smtp.gmail.com:587')
+        server.starttls()
+        server.login(username,password)
+        #print fromaddr,toaddrs,msg
+        server.sendmail(fromaddr, toaddrs, msg)
+        server.quit()
+        print 'I successfully sent the email'
+        return True
+    except:
+    #else:
+        print "Terribly sorry sir, I failed to send the email"
+        return False
+
+def testSendEmail():
+    # Credentials
+    credFileName='cred.txt'
+    credFile=open(credFileName,'r')
+    username = credFile.readline().strip()
+    password = credFile.readline().strip()
+    toaddrs=credFile.readline().strip()
+    keyword=credFile.readline().strip()
+    credFile.close()
+    #sendEmail(keyword,"quote",username+"@gmail.com",username,password)
+    sendEmail("testing","123",toaddrs,username,password)
+
+    
 if __name__ == "__main__":
     print quotes()
     fileName='testing123.py'
     runFile(fileName,'python')
-    selfDestruct()
+    testSendEmail()
+    #selfDestruct()
