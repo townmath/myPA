@@ -50,6 +50,7 @@ def checkMail():#checks mail for specific commands
                 body+=char
         body=body.strip().lower()
         print body
+        images=False
         if 'self destruct' or 'shutdown' in body:
             emailText=paCommands.selfDestruct()
             subject='Self Destruct Sequence'
@@ -60,11 +61,12 @@ def checkMail():#checks mail for specific commands
             emailText=paCommands.quotes()
             subject='Quotable Quote'
         elif 'python' in body:
-            emailText=paCommands.runFile(body[7:],'python')
+            emailText,images=paCommands.runFile(body[7:],'python')
             subject='Results'
         else:
             mail.store("1:*", '+X-GM-LABELS', '\\Trash')
-        sent=paCommands.sendEmail(subject,emailText,toaddrs,username,password)
+        sent=paCommands.sendEmail(subject,emailText,toaddrs,username,password
+                                  images)
         if sent:
             mail.store("1:*", '+X-GM-LABELS', '\\Trash')
     except:
