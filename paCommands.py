@@ -53,11 +53,12 @@ def runFile(filename,command):
         entry+=errData.strip()+'\n'
         errData=data.stderr.readline().decode()
     print entry
-    directory=''
-    for folder in filename.split('/'):
-        if not folder.endswith('.py'):
-            directory+=folder+'/'
-    return entry+'\n',directory
+    #works, but not necessary anymore, I'll save it just in case
+    #directory=''
+    #for folder in filename.split('/'):
+    #    if not folder.endswith('.py'):
+    #        directory+=folder+'/'
+    return entry+'\n'#,directory
 
 #https://docs.python.org/2/library/email-examples.html
 def addImages(subject,text,toaddrs,fromaddr,images):
