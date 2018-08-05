@@ -65,6 +65,7 @@ def addImages(subject,text,toaddrs,fromaddr,images):
     # Here are the email package modules we'll need
     from email.mime.image import MIMEImage
     from email.mime.multipart import MIMEMultipart
+    from email.mime.text import MIMEText
     import os
     import time
 
@@ -76,6 +77,7 @@ def addImages(subject,text,toaddrs,fromaddr,images):
     msg['From'] = fromaddr
     msg['To'] = toaddrs
     msg.preamble = text
+    msg.attach(MIMEText(text, 'plain'))
 
     # Assume we know that the image files are all in PNG format
     tenMinutes=10*60
