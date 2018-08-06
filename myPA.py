@@ -72,7 +72,7 @@ def checkMail():#checks mail for specific commands
             mail.store("1:*", '+X-GM-LABELS', '\\Trash')
     except:
     #else:
-        print "no mail yet"
+        print "no mail yet "+datetime.datetime.now().strftime('%I:%M%p')
     mail.close()
     mail.logout()
 
