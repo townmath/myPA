@@ -121,7 +121,7 @@ def sendEmail(subject,text,toaddrs,username,password,images=False):
         print "Terribly sorry sir, I failed to send the email"
         return False
 
-def testSendEmail():
+def testSendEmail(text="123"):
     # Credentials
     credFileName='cred.txt'
     credFile=open(credFileName,'r')
@@ -132,12 +132,12 @@ def testSendEmail():
     credFile.close()
     #sendEmail(keyword,"quote",username+"@gmail.com",username,password)
     #sendEmail("testing","123",toaddrs,username,password)
-    sendEmail("testing","123",toaddrs,username,password,".")
+    sendEmail("testing",text,toaddrs,username,password,".")
 
     
 if __name__ == "__main__":
     print quotes()
     fileName='testing123.py'
-    runFile(fileName,'python')
-    testSendEmail()
+    text=runFile(fileName,'python')
+    testSendEmail(text)
     #selfDestruct()
