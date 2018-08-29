@@ -60,6 +60,27 @@ def runFile(filename,command):
     #        directory+=folder+'/'
     return entry+'\n'#,directory
 
+#from: https://stackoverflow.com/questions/6225763/downloading-multiple-attachments-using-imaplib
+# Download all attachment files for a given email
+def saveAttachment(email_body, outputdir='.'):
+    import email
+    mail = email.message_from_string(email_body)
+
+    body=''
+    filename='none dude'
+    if mail.get_content_maintype() != 'multipart':
+        return body,filename
+    #filename='no attachments'
+    for part in mail.walk():
+        if part.get_content_type()=='text/plain':
+            body= part.get_payload(decode=True)
+            #print body
+
+        if part.get_content_maintype() != 'multipart' and part.get('Content-Disposition') is not None:
+            open(outputdir + '/' + part.get_filename(), 'wb').write(part.get_payload(decode=True))
+            filename=part.get_filename()
+    return body,filename
+
 #https://docs.python.org/2/library/email-examples.html
 def addImages(subject,text,toaddrs,fromaddr,images):
     # Here are the email package modules we'll need

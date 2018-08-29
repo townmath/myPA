@@ -38,16 +38,18 @@ def checkMail():#checks mail for specific commands
     #if True:
         #print result,data
         #print data[0][:2]
-        result, data = mail.uid('fetch', data[0][:3], '(BODY[TEXT])')#prints the body tex
+        result, data = mail.uid('fetch', data[0][:3], '(RFC822)')#(BODY[TEXT])')#prints the body tex
         #print mail.uid('fetch', data[0][:3], '(BODY[HEADER.FIELDS (FROM)])')#prints the body tex
         raw_email = data[0][1] # here's the body, which is raw text of the whole email
         returnCnt=0
-        body=''
-        for char in raw_email:
-            if char=="\n":
-                returnCnt+=1
-            if returnCnt==3:
-                body+=char
+        body,filename=paCommands.saveAttachment(raw_email)
+        #print "test2 "+filename
+        #body=''
+        #for char in raw_email:
+        #    if char=="\n":
+        #        returnCnt+=1
+        #    if returnCnt==3:
+        #        body+=char
         body=body.strip().lower()
         print body
         images=False
@@ -64,8 +66,13 @@ def checkMail():#checks mail for specific commands
             emailText=paCommands.runFile(body[7:],'python')
             images="."
             subject='Results'
+        elif 'attach' in body:
+            emailText=paCommands.runFile(filename,'python')
+            images='.'
+            subject='Results'
         else:
-            mail.store("1:*", '+X-GM-LABELS', '\\Trash')
+            print "blah"
+            #mail.store("1:*", '+X-GM-LABELS', '\\Trash')
         sent=paCommands.sendEmail(subject,emailText,toaddrs,username,password,
                                   images)
         if sent:
