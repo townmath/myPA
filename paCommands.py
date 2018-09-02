@@ -68,8 +68,8 @@ def saveAttachment(email_body, outputdir='.'):
 
     body=''
     filename='none dude'
-    if mail.get_content_maintype() != 'multipart':
-        return body,filename
+    #if mail.get_content_maintype() != 'multipart':
+    #    return body,filename
     #filename='no attachments'
     for part in mail.walk():
         if part.get_content_type()=='text/plain':

@@ -43,13 +43,16 @@ def checkMail():#checks mail for specific commands
         raw_email = data[0][1] # here's the body, which is raw text of the whole email
         returnCnt=0
         body,filename=paCommands.saveAttachment(raw_email)
-        #print "test2 "+filename
-        #body=''
-        #for char in raw_email:
-        #    if char=="\n":
-        #        returnCnt+=1
-        #    if returnCnt==3:
-        #        body+=char
+        print filename
+##        if not body:
+##            print "not body"
+##            print raw_email
+##            #body=''
+##            for char in raw_email:
+##                if char=="\n":
+##                    returnCnt+=1
+##                if returnCnt==3:
+##                    body+=char
         body=body.strip().lower()
         print body
         images=False
@@ -63,7 +66,8 @@ def checkMail():#checks mail for specific commands
             emailText=paCommands.quotes()
             subject='Quotable Quote'
         elif 'python' in body:
-            emailText=paCommands.runFile(body[7:],'python')
+            #print body.split()
+            emailText=paCommands.runFile(body.split()[1],'python')
             images="."
             subject='Results'
         elif 'attach' in body:
@@ -88,6 +92,7 @@ while True:
 #if True:#testing
     #while datetime.datetime.now().strftime('%a')!='Mon':
     if '06'<=datetime.datetime.now().strftime('%H')<='23':#24 hour clock
+        print 'test'
         checkMail()
         time.sleep(1200) #so you don't waste precious clock cycles checking, check every 20 min
     else:
